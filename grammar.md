@@ -7,8 +7,8 @@
 |    3 |                | $\mid$ | ProductionList ProductionSet  SEMICOLON|
 |    4 | ProductionSet | $\rightarrow$ |  SYMBOL  DERIVES  RightHandSide ProductionSet'|
 |    5 | ProductionSet'| $\rightarrow$ | ALSODERIVES RightHandSide ProductionSet'|
-|    5 |               | $\mid$ | EPSILON|
-|    6 | RightHandSide | $\rightarrow$ |  SymbolList|
-|    7 |               | $\mid$ | EPSILON|
-|    8 | SymbolList | $\rightarrow$ |  SYMBOL |
-|    9 | | $\mid$ | SymbolList SYMBOL |
+|    6 |               | $\mid$ | EPSILON|
+|    7 | RightHandSide | $\rightarrow$ |  SymbolList|
+|    8 |               | $\mid$ | EPSILON|
+|    9 | SymbolList | $\rightarrow$ |  SYMBOL |
+|    10| | $\mid$ | SymbolList SYMBOL |
