@@ -3,8 +3,8 @@
 | | | | |
 | --------|-------|---| ---|
 | 1 | Grammar | $\rightarrow$ | ProductionList |
-|    2 | ProductionList | $\rightarrow$ |  ProductionSet SEMICOLON|
-|    3 |                | $\mid$ | ProductionList ProductionSet  SEMICOLON|
+|    2 | ProductionList | $\rightarrow$ |  ProductionSet SEMICOLON ProductionList|
+|    3 |                | $\mid$ | EPSILON|
 |    4 | ProductionSet | $\rightarrow$ |  SYMBOL  DERIVES  RightHandSide ProductionSet'|
 |    5 | ProductionSet'| $\rightarrow$ | ALSODERIVES RightHandSide ProductionSet'|
 |    6 |               | $\mid$ | EPSILON|
