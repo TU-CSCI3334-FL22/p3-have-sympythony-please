@@ -9,6 +9,6 @@
 |    5 |               | $\mid$ | ProductionSet ALSODERIVES  RightHandSide|
 |    6 | RightHandSide | $\rightarrow$ |  SymbolList|
 |    7 |               | $\mid$ | EPSILON|
-|    8 | SymbolList | $\rightarrow$ |  SYMBOL | SymbolList'
-|    9 | SymbolList' | $\rightarrow$ |  SYMBOL | SymbolList'
+|    8 | SymbolList | $\rightarrow$ |  SYMBOL | SymbolList'|
+|    9 | SymbolList' | $\rightarrow$ |  SYMBOL | SymbolList'|
 |    10| | $\mid$ | EPSILON |
