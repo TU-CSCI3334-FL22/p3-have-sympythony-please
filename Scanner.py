@@ -30,22 +30,22 @@ def scanner(filename):
     # dict to represent the lookup table for symbols
     lookup_tbl = {}
 
-    # set of terminals, not sure if neede
+    # set of terminals, not sure if needed
     terminals = set()
 
     # 2D list of tokens for entire file
     lines = []
     for line in file:
+
+        # if the line is a comment ignore it
+        if line and line[0] == '/':
+            continue
         
         # output for current line
         tokens = []
 
         # each token in the line split on whitespace
         parts = line.split()
-        
-        # if the line is a comment ignore it
-        if parts and parts[0] == '//':
-            continue
 
         for part in parts:
             # check if the part is a terminal (all caps)
@@ -68,7 +68,8 @@ def scanner(filename):
         if tokens:
             lines.append(tokens)
 
-    print(list(terminals))
+    # can display terminals if needed
+    # print(list(terminals))
         
     # return type: (list[list[Token]], dict(string,int))
     return (lines,lookup_tbl)
