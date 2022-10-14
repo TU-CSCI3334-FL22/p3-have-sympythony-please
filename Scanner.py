@@ -1,6 +1,4 @@
 from enum import Enum
-from lib2to3.pgen2 import token
-from mailbox import linesep
 
 class Token(Enum):
     SEMICOLON = 1
@@ -15,7 +13,6 @@ token_map = {
     '|': Token.ALSODERIVES,
     'epsilon': Token.EPSILON,
 }
-
 
 def scanner(filename):
     """Main Scanner Function
@@ -33,6 +30,9 @@ def scanner(filename):
     # dict to represent the lookup table for symbols
     lookup_tbl = {}
 
+    # set of terminals, not sure if neede
+    terminals = set()
+
     # 2D list of tokens for entire file
     lines = []
     for line in file:
@@ -42,7 +42,16 @@ def scanner(filename):
 
         # each token in the line split on whitespace
         parts = line.split()
+        
+        # if the line is a comment ignore it
+        if parts and parts[0] == '//':
+            continue
+
         for part in parts:
+            # check if the part is a terminal (all caps)
+            if part.isupper():
+                terminals.add(part)
+
             # converting to lower to simplify checks
             # basically just for handling diff caps for epsilon
             token = part.lower()
@@ -58,6 +67,8 @@ def scanner(filename):
         # if the list isnt empty append it
         if tokens:
             lines.append(tokens)
+
+    print(list(terminals))
         
     # return type: (list[list[Token]], dict(string,int))
     return (lines,lookup_tbl)
