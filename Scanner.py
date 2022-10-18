@@ -21,18 +21,17 @@ def scanner(filename):
         filename (string): name of file we are scanning
 
     Returns:
-        tuple(list[list[Token]], dict[string,int]): 
-        (list of tokens, lookup table for symbols)
+        tuple(list[list[Token]], list[string]): 
+        (list of tokens, list of symbols)
     """
     # read in the file
     file = open(filename, "r")
     
     # dict to represent the lookup table for symbols
-    lookup_tbl = {}
+    # lookup_tbl = {}
 
     # set of terminals, not sure if needed
-    terminals = set()
-
+    symbols = set()
     # 2D list of tokens for entire file
     lines = []
     for line in file:
@@ -48,18 +47,12 @@ def scanner(filename):
         parts = line.split()
 
         for part in parts:
-            # check if the part is a terminal (all caps)
-            if part.isupper():
-                terminals.add(part)
-
             # converting to lower to simplify checks
             # basically just for handling diff caps for epsilon
             token = part.lower()
 
-            # if we encounter a token that isnt accounted for in lookup table, add it
-            if token not in token_map and part not in lookup_tbl:
-                # using len to assign idx instead of storing a local idx var
-                lookup_tbl[part] = len(lookup_tbl)
+            if token not in token_map:
+                symbols.add(part)
 
             # append the token to the list of tokens
             tokens.append(token_map.get(token, Token.SYMBOL))
@@ -67,9 +60,6 @@ def scanner(filename):
         # if the list isnt empty append it
         if tokens:
             lines.append(tokens)
-
-    # can display terminals if needed
-    # print(list(terminals))
         
-    # return type: (list[list[Token]], dict(string,int))
-    return (lines,lookup_tbl)
+    # return type: (list[list[Token]], list[string])
+    return (lines,list(symbols))
