@@ -20,6 +20,7 @@ def grammar_scan(contents):
 
 def grammar_parse(tokens):
     print("Read tokens into a grammar")
+    # returns an instance of Grammar class
     return parse(tokens)
 
 def fixLL(ir):
