@@ -1,7 +1,6 @@
 import getopt, sys
 from llGrammars import *
 
-
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "htrw", ["help", "table", "revise", "worklist"])
@@ -29,7 +28,7 @@ def main():
     if len(args) < 1:
         sys.exit("Please provide an input grammar")
     with open(args[0]) as f:
-        contents = f.read()
+        contents = f
         tokens = grammar_scan(contents)
         ir = grammar_parse(tokens)
         if revise:

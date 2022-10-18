@@ -1,31 +1,31 @@
 from enum import Enum
 
-class Token(Enum):
+class TokenCat(Enum):
     SEMICOLON = 1
     DERIVES = 2
     ALSODERIVES = 3
     EPSILON = 4
     SYMBOL = 5
 
+# [(TokenCat, "name")]
+
 token_map = {
-    ':': Token.DERIVES,
-    ';': Token.SEMICOLON,
-    '|': Token.ALSODERIVES,
-    'epsilon': Token.EPSILON,
+    ':': TokenCat.DERIVES,
+    ';': TokenCat.SEMICOLON,
+    '|': TokenCat.ALSODERIVES,
+    'epsilon': TokenCat.EPSILON,
 }
 
-def scanner(filename):
+def scanner(file):
     """Main Scanner Function
 
     Args:
-        filename (string): name of file we are scanning
+        file: file we are scanning
 
     Returns:
         tuple(list[list[Token]], list[string]): 
         (list of tokens, list of symbols)
     """
-    # read in the file
-    file = open(filename, "r")
     
     # dict to represent the lookup table for symbols
     # lookup_tbl = {}
@@ -39,9 +39,6 @@ def scanner(filename):
         # if the line is a comment ignore it
         if line and line[0] == '/':
             continue
-        
-        # output for current line
-        tokens = []
 
         # each token in the line split on whitespace
         parts = line.split()
@@ -55,11 +52,9 @@ def scanner(filename):
                 symbols.add(part)
 
             # append the token to the list of tokens
-            tokens.append(token_map.get(token, Token.SYMBOL))
+            lines.append((token_map.get(token, TokenCat.SYMBOL), part))
             
         # if the list isnt empty append it
-        if tokens:
-            lines.append(tokens)
         
     # return type: (list[list[Token]], list[string])
     return (lines,list(symbols))
