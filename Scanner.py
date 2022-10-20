@@ -13,7 +13,7 @@ token_map = {
     ':': TokenCat.DERIVES,
     ';': TokenCat.SEMICOLON,
     '|': TokenCat.ALSODERIVES,
-    'epsilon': TokenCat.EPSILON,
+    # 'epsilon': TokenCat.EPSILON,
 }
 
 def scanner(file):
