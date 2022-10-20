@@ -1,13 +1,9 @@
 from Scanner import *
 from Parser import *
+from FirstAndFollow import *
 
 class Token:
     type = ""
-
-class Tables:
-    firstTable = {}
-    followTable = {}
-    nextTable = {}
 
 def grammar_scan(contents):
     print("Scan contents into a list of tokens return it")
@@ -30,10 +26,10 @@ def make_tables(ir, worklist):
     if(worklist):
         sys.exit("Worklists not supported yet!")
     else:
+        computeFirsts(ir)
         print("Make and return the appropriate tables")
         return(Tables())
 
-        
 def print_tables(tables):
    print("Print tables in human-readable format")
 

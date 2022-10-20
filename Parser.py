@@ -84,8 +84,9 @@ def parse(tokens):
         sym_lst = []
         while(tups[0][0] == TokenCat.SYMBOL):
             # build symbol list
-            sym_lst.append(tups[0])
-            g.terminals.append(tups[0][1])
+            if tups[0][1].lower() != 'epsilon': 
+                sym_lst.append(tups[0])
+                g.terminals.append(tups[0][1])
             tups.pop(0)
         cat,_ = tups[0]
         if cat != TokenCat.SEMICOLON and cat != TokenCat.ALSODERIVES:
@@ -98,7 +99,7 @@ def parse(tokens):
 
     g.productions = productionList(lines)
     s = set(g.nonterminals)
-    g.terminals = [x for x in g.terminals if x not in s]
+    g.terminals = list(set([x for x in g.terminals if x not in s]))
 
     # productions should be a list of tups of (non_terminal, [symbols])
     # print for productions
