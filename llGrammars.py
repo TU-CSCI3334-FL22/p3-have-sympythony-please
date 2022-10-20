@@ -13,7 +13,7 @@ def grammar_scan(contents):
     print("Scan contents into a list of tokens return it")
     lines,symbols = scanner(contents)
     # lines is => [(TokenCat, string)]
-    print(list(map(lambda x: (x[0].name, x[1]),lines)))
+    # print(list(map(lambda x: (x[0].name, x[1]),lines)))
     # print(list(map(lambda x,y: x.name, lines)))
 
     return (lines,symbols)
