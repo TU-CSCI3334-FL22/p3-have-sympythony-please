@@ -87,6 +87,9 @@ def parse(tokens):
             sym_lst.append(tups[0])
             g.terminals.append(tups[0][1])
             tups.pop(0)
+        cat,_ = tups[0]
+        if cat != TokenCat.SEMICOLON and cat != TokenCat.ALSODERIVES:
+            quit()
         return sym_lst
 
     def quit():
