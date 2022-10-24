@@ -1,5 +1,3 @@
-from tokenize import Token
-from turtle import right
 from Scanner import *
 
 class Grammar:

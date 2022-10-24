@@ -23,6 +23,7 @@ def fixLL(ir):
     return ir
 
 def make_tables(ir, worklist):
+    print()
     if(worklist):
         sys.exit("Worklists not supported yet!")
     else:
