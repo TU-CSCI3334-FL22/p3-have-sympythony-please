@@ -27,7 +27,10 @@ def make_tables(ir, worklist):
     if(worklist):
         sys.exit("Worklists not supported yet!")
     else:
-        computeFirsts(ir)
+        cleanGrammar(ir)
+        table = computeFirsts(ir)
+        table = computeFollows(ir, table)
+        table = computeNext(ir,table)
         print("Make and return the appropriate tables")
         return(Tables())
 

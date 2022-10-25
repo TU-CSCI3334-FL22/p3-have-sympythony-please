@@ -1,0 +1,25 @@
+Scan contents into a list of tokens return it
+Read tokens into a grammar
+Goal: ['Expr']
+Expr: ['Term', 'EPrime']
+EPrime: ['PLUS', 'Term', 'EPrime']
+EPrime: ['MINUS', 'Term', 'EPrime']
+EPrime: []
+Term: ['Factor', 'TPrime']
+TPrime: ['TIMES', 'Factor', 'TPrime']
+TPrime: ['DIV', 'Factor', 'TPrime']
+TPrime: []
+Factor: ['LP', 'Expr', 'RP']
+Factor: ['NUMBER']
+Factor: ['IDENTIFIER']
+non-terminals: ['Goal', 'Expr', 'EPrime', 'Term', 'TPrime', 'Factor']
+terminals: ['NUMBER', 'IDENTIFIER', 'PLUS', 'MINUS', 'DIV', 'RP', 'TIMES', 'LP']
+
+Goal: {''}
+Expr: {'', 'RP'}
+EPrime: {'', 'RP'}
+Term: {'', 'PLUS', 'RP', 'MINUS'}
+TPrime: {'', 'PLUS', 'RP', 'MINUS'}
+Factor: {'', 'PLUS', 'MINUS', 'DIV', 'RP', 'TIMES'}
+Make and return the appropriate tables
+Print tables in human-readable format
