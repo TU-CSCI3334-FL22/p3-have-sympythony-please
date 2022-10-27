@@ -101,11 +101,11 @@ def parse(tokens):
 
     # productions should be a list of tups of (non_terminal, [symbols])
     # print for productions
-    for non_term,symbols in g.productions:
-        print(non_term+": ",end='')
-        printTups(symbols)
-    print("non-terminals: " + str(g.nonterminals))
-    print("terminals: " + str(g.terminals))
+    # for non_term,symbols in g.productions:
+    #     print(non_term+": ",end='')
+    #     printTups(symbols)
+    # print("non-terminals: " + str(g.nonterminals))
+    # print("terminals: " + str(g.terminals))
     
     return g
 

@@ -68,10 +68,10 @@ def computeFirsts(g):
                     same = False
                 t.firstTable[prod_name].add(x)
 
-    print("FIRST TABLE ----------------------------------------")
-    for k,v in t.firstTable.items():
-        print(k + ": ", end="")
-        print(v)
+    # print("FIRST TABLE ----------------------------------------")
+    # for k,v in t.firstTable.items():
+    #     print(k + ": ", end="")
+    #     print(v)
     # print("--------------------------------------------")
 
     return t
@@ -108,10 +108,10 @@ def computeFollows(g, t):
                         trailer = t.firstTable[prods[i]]
                 else:
                     trailer = t.firstTable[prods[i]]
-    print("FOLLOW TABLE ------------------------------")
-    for k,v in t.followTable.items():
-        print(k + ": ", end="")
-        print(v)
+    # print("FOLLOW TABLE ------------------------------")
+    # for k,v in t.followTable.items():
+    #     print(k + ": ", end="")
+    #     print(v)
     # print("-----------------------------------")
     return t
 
@@ -147,10 +147,10 @@ def computeNext(g,t):
         t.nextTable[idx].update(rhs)
 
 
-    print("NEXT TABLE -----------------------------------------------")
-    for k,v in t.nextTable.items():
-        print(f"{k} | {g.productions[k][1:]} => ", end="")
-        print(v)
-    print("---------------------------------------------")
+    # print("NEXT TABLE -----------------------------------------------")
+    # for k,v in t.nextTable.items():
+    #     print(f"{k} | {g.productions[k][1:]} => ", end="")
+    #     print(v)
+    # print("---------------------------------------------")
     return t
 
