@@ -67,9 +67,11 @@ def computeFirsts(g):
                     same = False
                 t.firstTable[prod_name].add(x)
 
-    # for k,v in t.firstTable.items():
-    #     print(k + ": ", end="")
-    #     print(v)
+    print("FIRST TABLE ----------------------------------------")
+    for k,v in t.firstTable.items():
+        print(k + ": ", end="")
+        print(v)
+    # print("--------------------------------------------")
 
     return t
 
@@ -105,25 +107,27 @@ def computeFollows(g, t):
                         trailer = t.firstTable[prods[i]]
                 else:
                     trailer = t.firstTable[prods[i]]
-
-    # for k,v in t.followTable.items():
-    #     print(k + ": ", end="")
-    #     print(v)
-
+    print("FOLLOW TABLE ------------------------------")
+    for k,v in t.followTable.items():
+        print(k + ": ", end="")
+        print(v)
+    # print("-----------------------------------")
     return t
+
+
 
 def computeNext(g,t):
     for i in range(len(g.productions)):
         t.nextTable[i] = set()
 
-    for idx, prod_name,prods in g.productions:
+    for idx,prod_name,prods in g.productions:
+        
         if not prods:
-            t.firstTable[prod_name].add(_epsilon)
-            # AND the follow set of prod_Name
-            t.firstTable[prod_name].update(t.followTable[prod_name])
+            t.nextTable[idx].add(_epsilon)
+            t.nextTable[idx].update(t.followTable[prod_name])
             continue
-
-        rhs = t.firstTable[prods[0]].copy()
+        
+        rhs = t.firstTable[prod_name].copy()
         rhs.discard(_epsilon)
 
         k = len(prods)
@@ -140,11 +144,11 @@ def computeNext(g,t):
 
         
         t.nextTable[idx].update(rhs)
-        # for x in rhs:
-        #     t.nextTable[i].add(x)
-    
-    for k,v in t.nextTable.items():
-        print(f"{k}: ", end="")
-        print(v)
 
+
+    print("NEXT TABLE -----------------------------------------------")
+    for k,v in t.nextTable.items():
+        print(f"{k} | {g.productions[k][1:]} => ", end="")
+        print(v)
+    print("---------------------------------------------")
     return t
