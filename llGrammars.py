@@ -1,6 +1,7 @@
 from Scanner import *
 from Parser import *
 from FirstAndFollow import *
+from ReadableOutput import *
 
 class Token:
     type = ""
@@ -35,7 +36,8 @@ def make_tables(ir, worklist):
         return(Tables())
 
 def print_tables(tables):
-   print("Print tables in human-readable format")
+    humanReadable(tables)
+    print("Print tables in human-readable format")
 
 def print_yaml(tables):
     print("Print tables in yaml format, or error if the involution of the next table fails")
