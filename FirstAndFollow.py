@@ -4,6 +4,7 @@ class Tables:
     firstTable = {}
     followTable = {}
     nextTable = {}
+    
 
 def cleanGrammar(g):
     line_num = 0
@@ -152,3 +153,4 @@ def computeNext(g,t):
         print(v)
     print("---------------------------------------------")
     return t
+

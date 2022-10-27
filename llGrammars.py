@@ -1,6 +1,7 @@
 from Scanner import *
 from Parser import *
 from FirstAndFollow import *
+from yaml import *
 
 class Token:
     type = ""
@@ -39,6 +40,7 @@ def print_tables(tables):
 
 def print_yaml(tables):
     print("Print tables in yaml format, or error if the involution of the next table fails")
+    return yaml_print(tables)
    
 def usage():
     print("error and help message here")
