@@ -24,15 +24,15 @@ def fixLL(ir):
 
 def make_tables(ir, worklist):
     print()
-    if(worklist):
-        sys.exit("Worklists not supported yet!")
-    else:
-        cleanGrammar(ir)
-        table = computeFirsts(ir)
-        table = computeFollows(ir, table)
-        table = computeNext(ir,table)
-        print("Make and return the appropriate tables")
-        return(Tables())
+    # if(worklist):
+    #     sys.exit("Worklists not supported yet!")
+    # else:
+    cleanGrammar(ir)
+    table = computeFirsts(ir, worklist)
+    table = computeFollows(ir, table, worklist)
+    table = computeNext(ir,table, worklist)
+    print("Make and return the appropriate tables")
+    return(Tables())
 
 def print_tables(tables):
    print("Print tables in human-readable format")

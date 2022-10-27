@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 
 class Tables:
     # symbol -> [terminals / non-terminals that follow]
@@ -18,7 +20,7 @@ def cleanGrammar(g):
 
 _epsilon = 'ε'
 # _epsilon = 'apple'
-def computeFirsts(g):
+def computeFirsts(g, worklists):
     # g -> list of productions -> list of terminals -> list of non-terminals
     t = Tables()
     for terminal in g.terminals:
@@ -34,38 +36,77 @@ def computeFirsts(g):
     for nt in g.nonterminals:
         t.firstTable[nt] = set()
 
-    # keep some boolean flag and whenever we update it we set to True
-    same = False
-    while not same:
-        same = True
-        for idx,prod_name,prods in reversed(g.productions):
-            # print(prods)
-            if not prods:
-                t.firstTable[prod_name].add(_epsilon)
-                continue
-            
-            # do we have to handle prod_lst \ {e}
-            # rep epsilon using "ε"
-            # rep eof using ""
-
-            rhs = t.firstTable[prods[0]].copy()
-            rhs.discard(_epsilon)
-
-            k = len(prods)
-            i = 0
-            while i < k and _epsilon in t.firstTable[prods[i]]:
-                for x in t.firstTable[prods[i]]:
-                    if x != _epsilon:
-                        rhs.add(x)
-                i += 1
+    # keep some boolean flag and whenever we update it we set to Truez
+    if not worklists:
+        same = False
+        while not same:
+            same = True
+            for idx,prod_name,prods in reversed(g.productions):
+                # print(prods)
+                if not prods:
+                    t.firstTable[prod_name].add(_epsilon)
+                    continue
                 
-            if i == k and _epsilon in t.firstTable[prods[k-1]]:
-                rhs.add(_epsilon)
+                # do we have to handle prod_lst \ {e}
+                # rep epsilon using "ε"
+                # rep eof using ""
 
-            for x in rhs:
-                if x not in t.firstTable[prod_name]:
-                    same = False
-                t.firstTable[prod_name].add(x)
+                rhs = t.firstTable[prods[0]].copy()
+                rhs.discard(_epsilon)
+
+                k = len(prods)
+                i = 0
+                while i < k and _epsilon in t.firstTable[prods[i]]:
+                    for x in t.firstTable[prods[i]]:
+                        if x != _epsilon:
+                            rhs.add(x)
+                    i += 1
+                    
+                if i == k and _epsilon in t.firstTable[prods[k-1]]:
+                    rhs.add(_epsilon)
+
+                for x in rhs:
+                    if x not in t.firstTable[prod_name]:
+                        same = False
+                    t.firstTable[prod_name].add(x)
+    else:
+        left_to_right = defaultdict(set)
+        for idx1,prod_name1,prods1 in g.productions:
+            for idx2,prod_name2,prods2 in g.productions:
+                if idx1 != idx2 and prod_name1 in prods2:
+                    left_to_right[prod_name1].add(prod_name2)
+        print("AHHH")
+        print(left_to_right)
+        worklist = g.productions.copy()
+        while not worklist:
+            for idx,prod_name,prods in g.productions:
+                # print(prods)
+                if not prods:
+                    t.firstTable[prod_name].add(_epsilon)
+                    continue
+                
+                # do we have to handle prod_lst \ {e}
+                # rep epsilon using "ε"
+                # rep eof using ""
+
+                rhs = t.firstTable[prods[0]].copy()
+                rhs.discard(_epsilon)
+
+                k = len(prods)
+                i = 0
+                while i < k and _epsilon in t.firstTable[prods[i]]:
+                    for x in t.firstTable[prods[i]]:
+                        if x != _epsilon:
+                            rhs.add(x)
+                    i += 1
+                    
+                if i == k and _epsilon in t.firstTable[prods[k-1]]:
+                    rhs.add(_epsilon)
+
+                for x in rhs:
+                    if x not in t.firstTable[prod_name]:
+                        same = False
+                    t.firstTable[prod_name].add(x)
 
     print("FIRST TABLE ----------------------------------------")
     for k,v in t.firstTable.items():
@@ -75,7 +116,7 @@ def computeFirsts(g):
 
     return t
 
-def computeFollows(g, t):
+def computeFollows(g, t, worklist):
     
     for nt in g.nonterminals:
         t.followTable[nt] = set()
@@ -116,7 +157,7 @@ def computeFollows(g, t):
 
 
 
-def computeNext(g,t):
+def computeNext(g,t, worklist):
     for i in range(len(g.productions)):
         t.nextTable[i] = set()
 
