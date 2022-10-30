@@ -1,6 +1,6 @@
 from Scanner import *
 from Parser import *
-from FirstAndFollow import *
+from MakeTables import *
 from yaml import *
 
 class Token:

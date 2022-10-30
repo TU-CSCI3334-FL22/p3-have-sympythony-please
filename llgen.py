@@ -35,12 +35,9 @@ def main():
             ir = fixLL(ir)
         tables = make_tables(ir, worklist)
         if printTable:
-            print("got here")
-            
-        else:
-            # print("at print tables")
             print_yaml(tables, ir)
-            # print_tables(tables)
+        else:
+            print_tables(tables)
 
 if __name__ == "__main__":
     main()
