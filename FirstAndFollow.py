@@ -75,11 +75,11 @@ def computeFirsts(g, worklists):
             for idx2,prod_name2,prods2 in g.productions:
                 if idx1 != idx2 and prod_name1 in prods2:
                     left_to_right[prod_name1].add(prod_name2)
-        print("AHHH")
         print(left_to_right)
         worklist = g.productions.copy()
-        while not worklist:
-            for idx,prod_name,prods in g.productions:
+        print(worklist)
+        while worklist:
+            for idx,prod_name,prods in worklist:
                 # print(prods)
                 if not prods:
                     t.firstTable[prod_name].add(_epsilon)
@@ -105,8 +105,13 @@ def computeFirsts(g, worklists):
 
                 for x in rhs:
                     if x not in t.firstTable[prod_name]:
-                        same = False
-                    t.firstTable[prod_name].add(x)
+                        for name,prod_set in left_to_right.items():
+                            if prod_name == name:
+                                for prod in prod_set:
+                                    if prod not in prods:
+                                        prods.append(prod)
+                                    print(worklist)
+                        t.firstTable[prod_name].add(x)
 
     print("FIRST TABLE ----------------------------------------")
     for k,v in t.firstTable.items():
