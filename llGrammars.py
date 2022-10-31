@@ -36,7 +36,8 @@ def make_tables(ir, worklist):
         return(Tables())
 
 def print_tables(tables):
-   print("Print tables in human-readable format")
+    humanReadable(tables)
+    print("Print tables in human-readable format")
 
 def print_yaml(tables, grammar):
     makeNextTable(tables,grammar)
