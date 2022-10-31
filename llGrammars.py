@@ -40,8 +40,8 @@ def print_tables(tables):
 
 def print_yaml(tables, grammar):
     makeNextTable(tables,grammar)
-    # print("Print tables in yaml format, or error if the involution of the next table fails")
+    print("Print tables in yaml format, or error if the involution of the next table fails")
     return yaml_print(tables)
-   
+
 def usage():
     print("error and help message here")
