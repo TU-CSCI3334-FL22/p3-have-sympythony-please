@@ -128,9 +128,6 @@ def computeNext(g,t):
             t.nextTable[idx].update(t.followTable[prod_name])
             continue
 
-        #rhs = t.firstTable[prod_name].copy()
-        #rhs.discard(_epsilon)
-
         rhs = t.nextTable[idx]
 
         k = len(prods)
@@ -160,9 +157,10 @@ def computeNext(g,t):
 
 
 
-    print("NEXT TABLE -----------------------------------------------")
-    for k,v in t.nextTable.items():
-        print(f"{k} | {g.productions[k][1:]} => ", end="")
-        print(v)
-    print("---------------------------------------------")
+    # print("NEXT TABLE -----------------------------------------------")
+    # for k,v in t.nextTable.items():
+    #     print(f"{k} | {g.productions[k][1:]} => ", end="")
+    #     print(v)
+    # print("---------------------------------------------")
+
     return t
