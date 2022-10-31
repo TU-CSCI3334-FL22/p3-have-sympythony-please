@@ -5,6 +5,7 @@ class Tables:
     followTable = {}
     nextTable = {}
 
+
 def cleanGrammar(g):
     line_num = 0
     # rn prods -> [(prod_name, prods)]
@@ -27,7 +28,7 @@ def computeFirsts(g):
         else:
             t.firstTable[terminal] = set()
             t.firstTable[terminal].add(terminal)
-    
+
     t.firstTable[_epsilon] = set(_epsilon)
     t.firstTable[""] = set("")
 
@@ -43,7 +44,7 @@ def computeFirsts(g):
             if not prods:
                 t.firstTable[prod_name].add(_epsilon)
                 continue
-            
+
             # do we have to handle prod_lst \ {e}
             # rep epsilon using "ε"
             # rep eof using ""
@@ -58,7 +59,7 @@ def computeFirsts(g):
                     if x != _epsilon:
                         rhs.add(x)
                 i += 1
-                
+
             if i == k and _epsilon in t.firstTable[prods[k-1]]:
                 rhs.add(_epsilon)
 
@@ -67,16 +68,16 @@ def computeFirsts(g):
                     same = False
                 t.firstTable[prod_name].add(x)
 
-    print("FIRST TABLE ----------------------------------------")
-    for k,v in t.firstTable.items():
-        print(k + ": ", end="")
-        print(v)
+    # print("FIRST TABLE ----------------------------------------")
+    # for k,v in t.firstTable.items():
+    #     print(k + ": ", end="")
+    #     print(v)
     # print("--------------------------------------------")
 
     return t
 
 def computeFollows(g, t):
-    
+
     for nt in g.nonterminals:
         t.followTable[nt] = set()
 
@@ -88,7 +89,7 @@ def computeFollows(g, t):
     while not same:
         same = True
         for idx,prod_name,prods in g.productions:
-            
+
             trailer = t.followTable[prod_name].copy()
 
             k = len(prods)
@@ -107,10 +108,10 @@ def computeFollows(g, t):
                         trailer = t.firstTable[prods[i]]
                 else:
                     trailer = t.firstTable[prods[i]]
-    print("FOLLOW TABLE ------------------------------")
-    for k,v in t.followTable.items():
-        print(k + ": ", end="")
-        print(v)
+    # print("FOLLOW TABLE ------------------------------")
+    # for k,v in t.followTable.items():
+    #     print(k + ": ", end="")
+    #     print(v)
     # print("-----------------------------------")
     return t
 
@@ -121,14 +122,23 @@ def computeNext(g,t):
         t.nextTable[i] = set()
 
     for idx,prod_name,prods in g.productions:
-        
+
         if not prods:
             t.nextTable[idx].add(_epsilon)
             t.nextTable[idx].update(t.followTable[prod_name])
             continue
-        
-        rhs = t.firstTable[prod_name].copy()
-        rhs.discard(_epsilon)
+
+        rhs = t.nextTable[idx]
+
+        k = len(prods)
+        i = 0
+        while i < k:
+            if _epsilon not in t.firstTable[prods[i]]:
+                for x in t.firstTable[prods[i]]:
+                    if x != _epsilon:
+                        rhs.add(x)
+                    i = k
+            i += 1
 
         k = len(prods)
         i = 0
@@ -137,18 +147,20 @@ def computeNext(g,t):
                 if x != _epsilon:
                     rhs.add(x)
             i += 1
-            
+
         if i == k and _epsilon in t.firstTable[prods[k-1]]:
             rhs.add(_epsilon) #AND the follow of prod_name
-            rhs.update(t.followTable[prod_name])
+            rhs.update(t.followTable[prod_name].copy())
 
-        
+
         t.nextTable[idx].update(rhs)
 
 
-    print("NEXT TABLE -----------------------------------------------")
-    for k,v in t.nextTable.items():
-        print(f"{k} | {g.productions[k][1:]} => ", end="")
-        print(v)
-    print("---------------------------------------------")
+
+    # print("NEXT TABLE -----------------------------------------------")
+    # for k,v in t.nextTable.items():
+    #     print(f"{k} | {g.productions[k][1:]} => ", end="")
+    #     print(v)
+    # print("---------------------------------------------")
+
     return t

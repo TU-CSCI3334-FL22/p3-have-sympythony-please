@@ -33,7 +33,7 @@ def parse(tokens):
                 quit()
             tups.pop(0)
 
-        return prod_list
+        return prod_list    
 
     def productionSet(tups):
         derivations = []
@@ -98,44 +98,5 @@ def parse(tokens):
     g.productions = productionList(lines)
     s = set(g.nonterminals)
     g.terminals = list(set([x for x in g.terminals if x not in s]))
-
-    # productions should be a list of tups of (non_terminal, [symbols])
-    # print for productions
-    for non_term,symbols in g.productions:
-        print(non_term+": ",end='')
-        printTups(symbols)
-    print("non-terminals: " + str(g.nonterminals))
-    print("terminals: " + str(g.terminals))
     
     return g
-
-    # if we've not found a colon we must be looking at a non_terminal
-    # and the beginning of a new production
-    # if we see an "alsoderives" we add a new production with same LHS and new RHS
-    # derivation = False
-    # production_name = "default"
-    # cur_production = []
-    # for tup in lines:
-    #     cat,s = tup
-
-    #     match cat:
-    #         case TokenCat.SYMBOL:
-    #             # if we see a symbol its either before or after a colon
-    #             if derivation:
-    #                 # derivation of a production
-    #                 g.terminals.append(s)
-    #                 cur_production.append(s)
-    #             else:
-    #                 # new non-terminal & derivation
-    #                 g.nonterminals.append(s)
-    #                 production_name = s
-    #         case TokenCat.DERIVES:
-    #             derivation = True
-    #         case TokenCat.ALSODERIVES:
-    #             g.productions.append((production_name, cur_production))
-    #             cur_production = []
-    #         case TokenCat.SEMICOLON:
-    #             derivation = False
-    #             g.productions.append((production_name, cur_production))
-    #             cur_production = []
-    #             production_name = "default"
