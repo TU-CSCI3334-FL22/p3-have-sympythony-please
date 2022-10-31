@@ -61,7 +61,7 @@ def yaml_print(tables, g):
 
     print("productions: ")
     for idx,prod_name,prods in g.productions:
-        print(idx , ": {", end="")
+        print(" ",idx , ": {", end="")
         print(prod_name, ": [", end="")
         k = 1
         for p in prods: 
@@ -79,7 +79,7 @@ def yaml_print(tables, g):
         terminal_map[t] = i
         i += 1
     for k,v in g.next_tbl.items():
-        print(k + ": {", end="")
+        print(" " , k + ": {", end="")
         n = 1
         for t in g.terminals + [""]:
             num = v[terminal_map[t]]
