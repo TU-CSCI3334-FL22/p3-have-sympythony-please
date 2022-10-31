@@ -4,6 +4,7 @@ class Tables:
     firstTable = {}
     followTable = {}
     nextTable = {}
+    next_tbl = {}
 
 
 def cleanGrammar(g):
