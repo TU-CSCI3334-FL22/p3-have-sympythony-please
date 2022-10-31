@@ -1,13 +1,14 @@
 from Scanner import *
 from Parser import *
 from MakeTables import *
+from ReadableOutput import *
 from yaml import *
 
 class Token:
     type = ""
 
 def grammar_scan(contents):
-    print("Scan contents into a list of tokens return it")
+    # print("Scan contents into a list of tokens return it")
     lines,symbols = scanner(contents)
     # lines is => [(TokenCat, string)]
     # print(list(map(lambda x: (x[0].name, x[1]),lines)))
@@ -16,7 +17,7 @@ def grammar_scan(contents):
     return (lines,symbols)
 
 def grammar_parse(tokens):
-    print("Read tokens into a grammar")
+    # print("Read tokens into a grammar")
     # returns an instance of Grammar class
     return parse(tokens)
 
@@ -32,16 +33,16 @@ def make_tables(ir, worklist):
         table = computeFirsts(ir)
         table = computeFollows(ir, table)
         table = computeNext(ir,table)
-        print("Make and return the appropriate tables")
+        # print("Make and return the appropriate tables")
         return(Tables())
 
 def print_tables(tables):
     humanReadable(tables)
-    print("Print tables in human-readable format")
+    # print("Print tables in human-readable format")
 
 def print_yaml(tables, grammar):
     makeNextTable(tables,grammar)
-    print("Print tables in yaml format, or error if the involution of the next table fails")
+    # print("Print tables in yaml format, or error if the involution of the next table fails")
     return yaml_print(tables)
 
 def usage():
