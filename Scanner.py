@@ -16,6 +16,24 @@ token_map = {
     # 'epsilon': TokenCat.EPSILON,
 }
 
+valid_chars = {";","|",":"}
+def custom_split(line):
+    output = []
+    part = ""
+    for c in line:
+        if not c.isalnum():
+            if part:
+                output.append(part)
+            if c in valid_chars:
+                output.append(c)
+            part = ""
+        else:
+            part += c
+    if part:
+        output.append(part)
+    return output
+
+
 def scanner(file):
     """Main Scanner Function
 
@@ -27,10 +45,6 @@ def scanner(file):
         (list of tokens, list of symbols)
     """
     
-    # dict to represent the lookup table for symbols
-    # lookup_tbl = {}
-
-    # set of terminals, not sure if needed
     symbols = set()
     # 2D list of tokens for entire file
     lines = []
@@ -41,7 +55,10 @@ def scanner(file):
             continue
 
         # each token in the line split on whitespace
-        parts = line.split()
+        parts = custom_split(line)
+        # _parts = line.split()
+        # print(_parts)
+        # print(parts)
 
         for part in parts:
             # converting to lower to simplify checks

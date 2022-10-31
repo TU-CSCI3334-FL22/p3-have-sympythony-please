@@ -3,6 +3,7 @@ import yaml
 
 _epsilon = 'ε'
 def makeNextTable(tbl,g):
+    invalid = False
     # print("here ")
     i = 0
     terminal_map = {}
@@ -21,14 +22,18 @@ def makeNextTable(tbl,g):
         for terminal in terminals:
             if terminal == _epsilon:
                 continue
-            print(f"storing {terminal} at rule {idx} in nt {nt}")
+            # print(f"storing {terminal} at rule {idx} in nt {nt}")
+            if g.next_tbl[nt][terminal_map[terminal]] == -1:
+                invalid = True
             g.next_tbl[nt][terminal_map[terminal]] = idx
         # print(f"{idx} {nt}")
 
-    print(g.terminals + [""])
-    for k,v in g.next_tbl.items():
-        print(k + ": ", end="")
-        print(v)
+    # print(g.terminals + [""])
+    # for k,v in g.next_tbl.items():
+    #     print(k + ": ", end="")
+    #     print(v)
+    if invalid:
+        print(" is invalid")
     return
 
 def yaml_print(tables, g):

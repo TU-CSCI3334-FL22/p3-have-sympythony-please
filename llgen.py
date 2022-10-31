@@ -34,10 +34,13 @@ def main():
         if revise:
             ir = fixLL(ir)
         tables = make_tables(ir, worklist)
+        print("File: " + args[0].split('/')[1], end="")
         if printTable:
-            print_yaml(tables, ir)
+            print()
+            # print_yaml(tables, ir)
         else:
-            print_tables(tables)
+            # print_tables(tables)
+            print()
 
 if __name__ == "__main__":
     main()
