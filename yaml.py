@@ -23,8 +23,9 @@ def makeNextTable(tbl,g):
             if terminal == _epsilon:
                 continue
             # print(f"storing {terminal} at rule {idx} in nt {nt}")
-            if g.next_tbl[nt][terminal_map[terminal]] == -1:
+            if g.next_tbl[nt][terminal_map[terminal]] != -1 and terminal != "":
                 invalid = True
+                #print("index " ,idx ,"nt ", nt, "terminal ", terminal)
             g.next_tbl[nt][terminal_map[terminal]] = idx
         # print(f"{idx} {nt}")
 

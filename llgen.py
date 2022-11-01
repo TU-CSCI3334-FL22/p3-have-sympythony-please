@@ -37,9 +37,9 @@ def main():
         print("File: " + args[0].split('/')[1], end="")
         if printTable:
             print()
-            # print_yaml(tables, ir)
+            print_yaml(tables, ir)
         else:
-            # print_tables(tables)
+            print_tables(tables)
             print()
 
 if __name__ == "__main__":
