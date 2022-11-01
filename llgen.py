@@ -12,7 +12,7 @@ def main():
     printHelp = False
     printTable = False
     revise = False
-    worklist = True
+    worklist = False
     for o, a in opts:
         if o in ("-h", "--help"):
             usage()

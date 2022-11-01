@@ -73,14 +73,17 @@ def computeFirsts(g, worklists):
         left_to_right = defaultdict(set)
         for idx1,prod_name1,prods1 in g.productions:
             for idx2,prod_name2,prods2 in g.productions:
-                if idx1 != idx2 and prod_name1 in prods2:
+                if prod_name1 != prod_name2 and prod_name1 in prods2:
                     left_to_right[prod_name1].add(prod_name2)
         print(left_to_right)
         worklist = g.productions.copy()
-        print(worklist)
         while worklist:
+            print("before for loop")
+            print(worklist)
             for idx,prod_name,prods in worklist:
-                # print(prods)
+                print("in for loop")
+                print(worklist)
+                print(prod_name, ' ', prods)
                 if not prods:
                     t.firstTable[prod_name].add(_epsilon)
                     continue
@@ -103,15 +106,19 @@ def computeFirsts(g, worklists):
                 if i == k and _epsilon in t.firstTable[prods[k-1]]:
                     rhs.add(_epsilon)
 
+                prods.clear();
                 for x in rhs:
                     if x not in t.firstTable[prod_name]:
                         for name,prod_set in left_to_right.items():
                             if prod_name == name:
                                 for prod in prod_set:
-                                    if prod not in prods:
-                                        prods.append(prod)
+                                    prods.append(prod)
                                     print(worklist)
                         t.firstTable[prod_name].add(x)
+                print(t.firstTable[prod_name])
+            for i,n,p in worklist:
+                if not p:
+                    worklist.remove((i,n,p))
 
     print("FIRST TABLE ----------------------------------------")
     for k,v in t.firstTable.items():
