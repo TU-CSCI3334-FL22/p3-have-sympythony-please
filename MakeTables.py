@@ -36,6 +36,8 @@ def computeFirsts(g):
     for nt in g.nonterminals:
         t.firstTable[nt] = set()
 
+
+
     # keep some boolean flag and whenever we update it we set to True
     same = False
     while not same:
@@ -69,11 +71,11 @@ def computeFirsts(g):
                     same = False
                 t.firstTable[prod_name].add(x)
 
-    # print("FIRST TABLE ----------------------------------------")
-    # for k,v in t.firstTable.items():
-    #     print(k + ": ", end="")
-    #     print(v)
-    # print("--------------------------------------------")
+    #print("FIRST TABLE ----------------------------------------")
+    #for k,v in t.firstTable.items():
+    #    print(k + ": ", end="")
+    #    print(v)
+    #print("--------------------------------------------")
 
     return t
 
@@ -106,14 +108,15 @@ def computeFollows(g, t):
                             trailer.add(x)
                         trailer.discard(_epsilon)
                     else:
-                        trailer = t.firstTable[prods[i]]
+                        trailer = t.firstTable[prods[i]].copy()
                 else:
-                    trailer = t.firstTable[prods[i]]
+                    trailer = t.firstTable[prods[i]].copy()
     # print("FOLLOW TABLE ------------------------------")
     # for k,v in t.followTable.items():
     #     print(k + ": ", end="")
     #     print(v)
     # print("-----------------------------------")
+
     return t
 
 
