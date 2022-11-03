@@ -4,6 +4,7 @@ import yaml
 _epsilon = 'ε'
 def makeNextTable(tbl,g):
     invalid = False
+    invalidProds = set()
     # print("here ")
     i = 0
     terminal_map = {}
@@ -25,6 +26,7 @@ def makeNextTable(tbl,g):
             # print(f"storing {terminal} at rule {idx} in nt {nt}")
             if g.next_tbl[nt][terminal_map[terminal]] != -1 and terminal != "":
                 invalid = True
+                invalidProds.add(idx)
                 #print("index " ,idx ,"nt ", nt, "terminal ", terminal)
             g.next_tbl[nt][terminal_map[terminal]] = idx
         # print(f"{idx} {nt}")
@@ -34,7 +36,15 @@ def makeNextTable(tbl,g):
     #     print(k + ": ", end="")
     #     print(v)
     if invalid:
-        print(" is invalid")
+        print("Grammar is invalid at production(s):")
+        for prods in invalidProds:
+            print(g.productions[prods][1], ": ", end = "")
+            if len(g.productions[prods][2])==0:
+                print("epsilon", end="")
+            for p in g.productions[prods][2]:
+                print(p, end="")
+            print()
+        exit()
     return
 
 def yaml_print(tables, g):
@@ -102,6 +112,7 @@ def yaml_print(tables, g):
                 print(", ", end = "")
             n+=1
         print("}")
+    print()
 
 
 
