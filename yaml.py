@@ -36,7 +36,7 @@ def makeNextTable(tbl,g):
     #     print(k + ": ", end="")
     #     print(v)
     if invalid:
-        print("Grammar is invalid at production(s):")
+        print("Grammar is not LL(1) at production(s):")
         for prods in invalidProds:
             print(g.productions[prods][1], ": ", end = "")
             if len(g.productions[prods][2])==0:

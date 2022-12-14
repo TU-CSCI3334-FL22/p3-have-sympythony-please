@@ -34,7 +34,7 @@ def main():
         if revise:
             ir = fixLL(ir)
         tables = make_tables(ir, worklist)
-        print("File: " + args[0].split('/')[1])
+        #print("File: " + args[0].split('/')[1])
         if printTable:
             print()
             print_yaml(tables, ir)

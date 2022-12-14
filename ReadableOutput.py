@@ -2,7 +2,7 @@ import json
 
 def printDict(d):
     for k,v in d.items():
-        print(f"  {k}: ", end="")
+        print("  {k}: ", end="")
         print(v)
     print("    " + '-'*30)
 
