@@ -1,12 +1,12 @@
-Interface: 4
-* Error in printing (misplaced f) crashed program
+Interface: 5
 Scanner/Parser: 10
-Correctness: 45
-* Human readable output doesn't have the indexes in the tables printed
+Correctness: 49
+* Odd extra line in human-readable output
+  : set()
 YAML table: 18
 * Falsely detects demo.gram as non-LL1 (not sure why), otherwise detects non-LL1ness correctly.
 * After that everything seems to work, although errors are Not Pretty.
 Worklists: 0
 * Worklists not supported
 Missing Points: 5
-Total: 82 (B)
+Total: 87 (B+)
